@@ -41,7 +41,7 @@ const App = () => {
           transition={{ duration: 0.6 }}
           className="text-5xl md:text-6xl relative font-bold tracking-tight leading-tight"
         >
-          <span className="bg-blue-600 text-background px-5 rounded-sm   trk">
+          <span className="bg-blue-600 text-background px-5 rounded-sm ">
             Track
           </span>{" "}
           every application.

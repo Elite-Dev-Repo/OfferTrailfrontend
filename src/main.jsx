@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import Register from "./Register";
 import ProtectedRoutes from "./ProtectedRoutes";
 import Dashboard from "./Dashboard";
+import Applications from "./Applications";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoutes>
         <Dashboard />
+      </ProtectedRoutes>
+    ),
+  },
+  {
+    path: "/dashboard/applications",
+    element: (
+      <ProtectedRoutes>
+        <Applications />
       </ProtectedRoutes>
     ),
   },
