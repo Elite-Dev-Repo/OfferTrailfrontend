@@ -10,7 +10,6 @@ import {
   PlusSignIcon,
 } from "@hugeicons/core-free-icons";
 
-// This is the key to fixing the error
 import { HugeiconsIcon } from "@hugeicons/react";
 
 import Footer from "./components/Footer";
@@ -18,6 +17,7 @@ import Nav from "./components/Nav";
 import Pricing from "./components/Pricing";
 import React from "react";
 import doodle from "./assets/doodle.png";
+import More from "./components/More";
 import Faqs from "./components/Faqs";
 
 const App = () => {
@@ -105,6 +105,8 @@ const App = () => {
         </div>
       </section>
 
+      {/* MORE */}
+      <More />
       {/* PRICING */}
       <Pricing />
       {/* FAQ */}

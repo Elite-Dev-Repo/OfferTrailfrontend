@@ -265,11 +265,15 @@ export default function Applications() {
                 <div className="flex justify-between items-start mt-8 z-2">
                   <div className="space-y-1 z-2">
                     <h3 className="text-xl font-bold leading-none tracking-tight z-2">
-                      Role - {job.role}
+                      <span className="opacity-50 font-mono font-light">
+                        Role:
+                      </span>{" "}
+                      {job.role}
                     </h3>
 
-                    <p className="text-foreground/60 z-2 font-medium">
-                      @ {job.company_name}
+                    <p className="text-foreground/80 font-bold">
+                      <span className="opacity-50 font-mono font-light">@</span>{" "}
+                      {job.company_name}
                     </p>
                   </div>
 
@@ -332,8 +336,8 @@ export default function Applications() {
 
       {/* New Application Modal */}
       {open && (
-        <div className="fixed inset-0 bg-background/80 backdrop-blur-md flex items-center justify-center z-50 p-4">
-          <div className="w-full max-w-lg bg-card border border-border rounded-[2.5rem] p-8 shadow-2xl ring-1 ring-black/5 animate-in fade-in zoom-in duration-200">
+        <div className="fixed inset-0 bg-foreground/20 backdrop-blur-lg flex items-center justify-center z-50 p-4">
+          <div className="w-full max-w-lg bg-card border border-border rounded-[.5rem] p-8 shadow-2xl ring-1 ring-black/5 animate-in fade-in zoom-in duration-200">
             <h3 className="text-2xl font-bold mb-6 tracking-tight">
               New Application
             </h3>

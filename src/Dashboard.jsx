@@ -239,8 +239,8 @@ export default function Dashboard() {
 
       {/* Modal logic */}
       {open && (
-        <div className="fixed inset-0 bg-background/80 backdrop-blur-md flex items-center justify-center z-50 p-4">
-          <div className="w-full max-w-lg bg-card border border-border rounded-[2.5rem] p-8 shadow-2xl ring-1 ring-black/5 animate-in fade-in zoom-in duration-200">
+        <div className="fixed inset-0 bg-foreground/20 backdrop-blur-lg flex items-center justify-center z-50 p-4">
+          <div className="w-full max-w-lg bg-card border border-border rounded-[.5rem] p-8 shadow-2xl ring-1 ring-black/5 animate-in fade-in zoom-in duration-200">
             <h3 className="text-2xl font-bold mb-6 tracking-tight">
               New Application
             </h3>
@@ -258,7 +258,7 @@ export default function Dashboard() {
                     onChange={(e) =>
                       setFormData({ ...formData, company_name: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-2xl bg-secondary/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition"
+                    className="w-full px-4 py-3 rounded-sm bg-secondary/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -273,7 +273,7 @@ export default function Dashboard() {
                     onChange={(e) =>
                       setFormData({ ...formData, role: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-2xl bg-secondary/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition"
+                    className="w-full px-4 py-3 rounded-sm bg-secondary/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition"
                   />
                 </div>
               </div>
@@ -293,7 +293,7 @@ export default function Dashboard() {
                         application_date: e.target.value,
                       })
                     }
-                    className="w-full px-4 py-3 rounded-2xl bg-secondary/50 border border-border focus:border-primary outline-none transition"
+                    className="w-full px-4 py-3 rounded-sm bg-secondary/50 border border-border focus:border-primary outline-none transition"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -305,7 +305,7 @@ export default function Dashboard() {
                     onChange={(e) =>
                       setFormData({ ...formData, status: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-2xl bg-secondary/50 border border-border focus:border-primary outline-none transition appearance-none"
+                    className="w-full px-4 py-3 rounded-sm bg-secondary/50 border border-border focus:border-primary outline-none transition appearance-none"
                   >
                     <option value="Pending">Pending</option>
                     <option value="Accepted">Accepted</option>
@@ -323,9 +323,9 @@ export default function Dashboard() {
                   onChange={(e) =>
                     setFormData({ ...formData, notes: e.target.value })
                   }
-                  placeholder="What happened in the interview?"
+                  placeholder="Optional notes?"
                   rows="3"
-                  className="w-full px-4 py-3 rounded-2xl bg-secondary/50 border border-border focus:border-primary outline-none transition resize-none"
+                  className="w-full px-4 py-3 rounded-sm bg-secondary/50 border border-border focus:border-primary outline-none transition resize-none"
                 ></textarea>
               </div>
 
@@ -333,13 +333,13 @@ export default function Dashboard() {
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="px-6 py-3 rounded-2xl font-semibold hover:bg-secondary transition"
+                  className="px-6 py-3 rounded-sm font-semibold hover:bg-secondary transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-8 py-3 rounded-2xl bg-primary text-primary-foreground font-bold shadow-lg shadow-primary/20 hover:opacity-90 transition"
+                  className="px-8 py-3 rounded-sm bg-primary text-primary-foreground font-bold shadow-lg shadow-primary/20 hover:opacity-90 transition"
                 >
                   Save
                 </button>
