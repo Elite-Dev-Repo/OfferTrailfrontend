@@ -108,14 +108,14 @@ export default function Dashboard() {
           </Link>
           <nav className="flex gap-2 flex-col">
             <Link to="/dashboard">
-              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 text-muted-foreground hover:bg-secondary rounded-sm transition">
+              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 rounded-sm bg-primary/10 text-primary act">
                 <HugeiconsIcon icon={DashboardSquare01Icon} size={18} />
                 Dashboard
               </button>
             </Link>
 
             <Link to="/dashboard/applications">
-              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 rounded-sm bg-primary/10 text-primary ">
+              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5   text-muted-foreground hover:bg-secondary rounded-sm transition">
                 <HugeiconsIcon icon={Briefcase01Icon} size={18} />
                 Applications
               </button>

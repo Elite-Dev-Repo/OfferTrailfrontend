@@ -132,7 +132,7 @@ export default function Applications() {
             </Link>
 
             <Link to="/dashboard/applications">
-              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 rounded-sm bg-primary/10 text-primary ">
+              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 rounded-sm bg-primary/10 text-primary act">
                 <HugeiconsIcon icon={Briefcase01Icon} size={18} />
                 Applications
               </button>

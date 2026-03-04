@@ -166,3 +166,18 @@
     transform: translateX(0px);
   }
 }
+
+.act {
+  position: relative;
+}
+.act::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2px;
+  height: 100%;
+  margin: auto;
+  background-color: var(--primary);
+}
