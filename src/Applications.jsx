@@ -252,15 +252,6 @@ export default function Applications() {
                     className={`absolute w-30 h-30  rounded-full left-[-10%] top-[-20%] z-1  ${statusStyles[job.status]}`}
                   ></div>
 
-                  <div
-                    onClick={() => {
-                      DeleteJob(job.id);
-                    }}
-                    className="text-red-500 p-2 rounded-full items-center justify-center hover:bg-red-50 absolute top-2 right-3 hidden group-hover:flex"
-                  >
-                    <HugeiconsIcon icon={Delete02Icon} size={25} />
-                  </div>
-
                   {/* Header: Role & Status */}
 
                   <div className="flex justify-between items-start mt-8 z-2">

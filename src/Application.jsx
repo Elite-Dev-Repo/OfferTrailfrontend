@@ -17,7 +17,7 @@ function Application() {
 
   const loadJob = async () => {
     try {
-      const res = await api.get(`/job/${id}/`);
+      const res = await api.get(`/myjobs/${id}`);
       setJob(res.data);
     } catch (error) {
       console.error("Failed to fetch job:", error);

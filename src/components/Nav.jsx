@@ -11,7 +11,7 @@ function Nav() {
   const handleLogout = () => {
     localStorage.removeItem(ACCESS);
     localStorage.removeItem(REFRESH);
-    navigate("/register");
+    navigate("/");
   };
 
   return (
