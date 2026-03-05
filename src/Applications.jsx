@@ -145,7 +145,7 @@ export default function Applications() {
         </div>
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 text-sm hover:text-destructive transition p-4 py-3 mx-4 bg-red-100 text-red-500 rounded-lg border border-red-600 "
+          className="flex items-center gap-3 text-sm hover:text-destructive transition p-4 py-3 mx-4 bg-red-50 text-red-500 rounded-lg border border-red-400 "
         >
           <HugeiconsIcon icon={Logout01Icon} size={20} />
           Logout
@@ -242,7 +242,7 @@ export default function Applications() {
               <Link to={`/application/${job.id}`}>
                 <div
                   key={job.id}
-                  className="group relative p-8 overflow-hidden rounded-sm border border-border bg-card flex flex-col gap-4 hover:border-foreground/40 hover:shadow-md transition-all duration-300"
+                  className="group md:min-h-70 relative p-8 overflow-hidden rounded-sm border border-border bg-card flex flex-col gap-4 hover:border-foreground/40 hover:shadow-md transition-all duration-300"
                 >
                   <div
                     className={`absolute w-60 h-60  rounded-full right-[-10%] bottom-[-20%] z-1  ${statusStyles[job.status]}`}
@@ -314,7 +314,7 @@ export default function Applications() {
                         className="mt-1 text-muted-foreground shrink-0"
                       />
 
-                      <p className="text-sm text-muted-foreground line-clamp-3">
+                      <p className="text-sm text-muted-foreground line-clamp-1">
                         {job.notes}
                       </p>
                     </div>

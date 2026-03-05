@@ -18,8 +18,9 @@ import Pricing from "./components/Pricing";
 import React from "react";
 import More from "./components/More";
 import Faqs from "./components/Faqs";
+import { ACCESS } from "./constants";
 
-const App = () => {
+function App() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
@@ -114,6 +115,6 @@ const App = () => {
       <Footer />
     </div>
   );
-};
+}
 
 export default App;

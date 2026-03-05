@@ -52,14 +52,14 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background text-foreground px-6">
+    <div className="min-h-screen auth flex items-center justify-center text-foreground px-6">
       <Toaster position="top-center" richColors />
-      <div className="w-full max-w-md p-10 rounded-3xl border border-border bg-card shadow-sm">
-        <div className="w-fit flex items-center gap-2 mx-auto">
+      <div className="w-full max-w-md p-10 rounded-3xl border border-border bg-background backdrop-blur-[15px] shadow-sm">
+        <div className="w-fit flex items-center gap-2 mx-auto mb-4">
           <button
             onClick={() => setIsLogin(!isLogin)}
             className={` px-3 py-2 rounded-sm
-            ${isLogin ? "bg-foreground text-background" : "text-foreground bg-primary/5"}
+            ${isLogin ? "bg-primary text-background" : "text-foreground bg-primary/5"}
             `}
           >
             Login
@@ -67,7 +67,7 @@ export default function Register() {
           <button
             onClick={() => setIsLogin(!isLogin)}
             className={` px-3 py-2 rounded-sm
-            ${isLogin ? "text-foreground bg-primary/5" : "bg-foreground text-background"}
+            ${isLogin ? "text-foreground bg-primary/5" : "bg-primary text-background"}
             `}
           >
             Signup

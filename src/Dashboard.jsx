@@ -128,7 +128,7 @@ export default function Dashboard() {
         </div>
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 text-sm hover:text-destructive transition p-4 py-3 mx-4 bg-red-100 text-red-500 rounded-lg border border-red-600 "
+          className="flex items-center gap-3 text-sm hover:text-destructive transition p-4 py-3 mx-4 bg-red-50 text-red-500 rounded-lg border border-red-400 "
         >
           <HugeiconsIcon icon={Logout01Icon} size={20} />
           Logout

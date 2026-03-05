@@ -1,7 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ACCESS, REFRESH } from "../constants";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Logout01Icon } from "@hugeicons/core-free-icons";
+import { useNavigate } from "react-router-dom";
 
-const Nav = () => {
+function Nav() {
+  const navigate = useNavigate();
+  const token = localStorage.getItem(ACCESS);
+  const handleLogout = () => {
+    localStorage.removeItem(ACCESS);
+    localStorage.removeItem(REFRESH);
+    navigate("/register");
+  };
+
   return (
     <nav className="flex items-center justify-between px-8 py-6 border-b border-border">
       <Link to="/">
@@ -19,15 +31,34 @@ const Nav = () => {
         <a href="/#faq" className="hover:opacity-70 transition">
           FAQ
         </a>
-        <Link
-          to="/register"
-          className="px-5 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition"
-        >
-          Get Started
-        </Link>
+
+        {token ? (
+          <div className="flex gap-3 items-center">
+            <Link
+              to="/dashboard"
+              className="px-5 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition"
+            >
+              Dashboard
+            </Link>
+
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-3 text-sm hover:text-destructive transition p-4 py-3 mx-4 bg-red-50 text-red-500 rounded-lg border border-red-300 "
+            >
+              <HugeiconsIcon icon={Logout01Icon} size={20} />
+            </button>
+          </div>
+        ) : (
+          <Link
+            to="/register"
+            className="px-5 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition"
+          >
+            Get Started
+          </Link>
+        )}
       </div>
     </nav>
   );
-};
+}
 
 export default Nav;
