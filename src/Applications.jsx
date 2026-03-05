@@ -61,18 +61,6 @@ export default function Applications() {
     }
   };
 
-  const DeleteJob = async (id) => {
-    try {
-      const res = await api.delete(`/myjobs/${id}`);
-      if (res.status === 204) {
-        setJobs((prevJobs) => prevJobs.filter((job) => job.id !== id));
-        toast.success("Deleted");
-      }
-    } catch (error) {
-      console.error("Failed to Delete job:", error);
-    }
-  };
-
   useEffect(() => {
     LoadJobs();
   }, []);

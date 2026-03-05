@@ -9,54 +9,54 @@ const Pricing = () => {
 
   const pricingPlans = [
     {
-      name: "Starter Plan",
+      name: "Starter",
       price: "0",
       period: "per month",
       description:
-        "Perfect for beginners who want to explore the basic features.",
-      buttonText: "Start with Starter",
+        "Perfect for job seekers who want a simple way to track applications.",
+      buttonText: "Start Free",
       features: [
-        "Real-time market tracking",
-        "Basic portfolio management",
-        "Email notifications",
-        "Price alerts",
-        "Personal watchlists",
-        "Email support",
+        "Track up to 50 job applications",
+        "Application status tracking",
+        "Add notes for each application",
+        "Basic dashboard overview",
+        "Email reminders",
+        "Community support",
       ],
       isPopular: false,
     },
     {
-      name: "Pro Plan",
-      price: "20",
+      name: "Pro",
+      price: "9",
       period: "per month",
       description:
-        "For active traders who want deeper insights and advanced analysis tools.",
-      buttonText: "Start with Pro",
+        "For active job seekers applying to multiple roles and companies.",
+      buttonText: "Upgrade to Pro",
       tag: "Recommended",
       features: [
-        "Advanced market analysis",
-        "Full portfolio management",
-        "Multiple wallet support",
-        "Smart alerts & notifications",
-        "Instant token swaps",
-        "Priority 24/7 support",
+        "Unlimited job applications",
+        "Advanced application pipeline",
+        "Interview & follow-up reminders",
+        "Resume & cover letter storage",
+        "Application analytics",
+        "Priority email support",
       ],
       isPopular: true,
     },
     {
-      name: "Elite Plan",
-      price: "49",
+      name: "Career Plus",
+      price: "19",
       period: "per month",
       description:
-        "For professional traders and teams who want the full Cryptofi experience.",
-      buttonText: "Start with Elite",
+        "For serious job hunters who want powerful tools to stay organized and land roles faster.",
+      buttonText: "Start Career Plus",
       features: [
-        "All features of the Pro plan",
-        "Advanced AI trading insights",
-        "Team account management",
-        "Custom analytics dashboards",
-        "Beta access to new features",
-        "Dedicated account manager",
+        "Everything in Pro",
+        "AI-powered resume suggestions",
+        "Job match insights",
+        "Export applications to CSV",
+        "Advanced analytics dashboard",
+        "Early access to new features",
       ],
       isPopular: false,
     },
@@ -112,7 +112,7 @@ const Pricing = () => {
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: index * 0.2 }}
-            className="flex flex-col gap-5 rounded-md border border-foreground/20 bg-foreground/3 p-5"
+            className="flex flex-col flex-1 gap-5 rounded-md border border-foreground/20 bg-foreground/3 p-5"
           >
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-medium">{plan.name}</h3>{" "}

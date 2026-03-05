@@ -13,29 +13,34 @@ import { motion } from "framer-motion";
 function Faqs() {
   const faqs = [
     {
-      question: "Is OfferTrail really free to use?",
+      question: "Is OfferTrail free to use?",
       answer:
-        "Yes! Our 'Starter Plan' allows you to track unlimited job applications and manage your status workflow at zero cost. Advanced analytics are reserved for our Pro users.",
+        "Yes! The Starter plan is completely free and lets you track up to 50 job applications. If you need unlimited tracking, reminders, and analytics, you can upgrade to the Pro plan anytime.",
     },
     {
-      question: "How does the application tracking work?",
+      question: "How does OfferTrail help me track job applications?",
       answer:
-        "Simply add a new job entry with the company name, role, and current status. As you move through interviews, you can update the status, add notes, and keep all your job search data in one organized dashboard.",
+        "You can add each job application with details like the company, role, and status. As you progress through the hiring process, you can update statuses, add notes, and keep everything organized in one dashboard.",
     },
     {
-      question: "Is my data secure and private?",
+      question: "Can I track interview stages and follow-ups?",
       answer:
-        "Absolutely. We use Supabase for secure authentication and database isolation. Your application data is tied strictly to your account and is never shared with third parties.",
+        "Yes. OfferTrail lets you update application stages such as Applied, Interviewing, Offer, or Rejected. Pro users can also set reminders for follow-ups and interviews.",
     },
     {
-      question: "Can I export my data?",
+      question: "Is my job search data private?",
       answer:
-        "Pro users can export their entire application history as a CSV or PDF file, perfect for keeping personal records or sharing progress with a career coach.",
+        "Absolutely. Your data is tied only to your account and securely stored. We never share your job application information with recruiters or third parties.",
     },
     {
-      question: "Can I use OfferTrail on my mobile phone?",
+      question: "Can I export my job application data?",
       answer:
-        "Yes! OfferTrail is built with a responsive TailwindCSS design, making it fully accessible and easy to use on any mobile browser or tablet.",
+        "Yes. Pro users can export their application history as a CSV file, making it easy to keep personal records or analyze their job search progress.",
+    },
+    {
+      question: "Can I use OfferTrail on my phone?",
+      answer:
+        "Yes! OfferTrail is fully responsive and works smoothly on mobile phones, tablets, and desktop browsers so you can update your applications anywhere.",
     },
   ];
 

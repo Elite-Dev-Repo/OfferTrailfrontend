@@ -43,7 +43,7 @@ function Nav() {
 
             <button
               onClick={handleLogout}
-              className="flex items-center gap-3 text-sm hover:text-destructive transition p-4 py-3 mx-4 bg-red-50 text-red-500 rounded-lg border border-red-300 "
+              className="flex items-center gap-3 text-sm hover:text-destructive transition  p-2 mx-4 bg-red-50 text-red-500 rounded-lg border border-red-300 "
             >
               <HugeiconsIcon icon={Logout01Icon} size={20} />
             </button>
