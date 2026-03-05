@@ -1,5 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
+import favourite from "../assets/favourite.jpg";
+import applic from "../assets/applic.jpg";
+import analyze from "../assets/analyze.jpg";
 
 const features = [
   {
@@ -8,8 +11,8 @@ const features = [
     description:
       "Bookmark jobs you’re interested in and access them anytime. Never lose track of opportunities again with our centralized bookmarking system.",
     tag: "Organization",
-    image:
-      "https://cdn.jsdelivr.net/gh/realvjy/3dicons/src/assets/images/bookmark-dynamic-color.png",
+    image: favourite,
+    backG: "bg-primary",
   },
   {
     id: 2,
@@ -17,8 +20,8 @@ const features = [
     description:
       "Monitor your job applications from Applied to Offer. Visualize your progress and stay organized with real-time status updates and stage tracking.",
     tag: "Workflow",
-    image:
-      "https://cdn.jsdelivr.net/gh/realvjy/3dicons/src/assets/images/kanban-dynamic-color.png",
+    image: applic,
+    backG: "bg-[lightblue]",
   },
   {
     id: 3,
@@ -26,8 +29,8 @@ const features = [
     description:
       "See insights like interview rate, application count, and performance trends to improve your strategy and get hired faster.",
     tag: "Analytics",
-    image:
-      "https://cdn.jsdelivr.net/gh/realvjy/3dicons/src/assets/images/chart-dynamic-color.png",
+    image: analyze,
+    backG: "bg-[#440C3F]",
   },
 ];
 
@@ -68,7 +71,9 @@ const More = () => {
             <div className="flex-1 w-full relative group ">
               {/* Decorative background glow */}
 
-              <div className="relative overflow-hidden rounded-sm border border-border bg-card  ring-1 ring-black/5">
+              <div
+                className={`relative overflow-hidden rounded-sm border border-border ${feature.backG}`}
+              >
                 <img
                   src={feature.image}
                   alt={feature.title}

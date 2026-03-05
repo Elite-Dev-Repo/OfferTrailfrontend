@@ -16,7 +16,6 @@ import Footer from "./components/Footer";
 import Nav from "./components/Nav";
 import Pricing from "./components/Pricing";
 import React from "react";
-import doodle from "./assets/doodle.png";
 import More from "./components/More";
 import Faqs from "./components/Faqs";
 
@@ -29,7 +28,7 @@ const App = () => {
       <section
         className={`hero px-8 py-28 relative text-center max-w-6xl mx-auto`}
       >
-        <div className="absolute bottom-[15%]  h-fit w-fit animate-spin animation-duration-7005 text-blue-600">
+        <div className="absolute bottom-[15%]  h-fit w-fit animate-spin animation-duration-7005 text-primary">
           <HugeiconsIcon icon={PlusSignIcon} size={58} />
         </div>
         {/* <div className="absolute right-0 top-[15%] h-fit w-fit animate-bounce shad animation-duration-4000">
@@ -41,7 +40,7 @@ const App = () => {
           transition={{ duration: 0.6 }}
           className="text-5xl md:text-6xl relative font-bold tracking-tight leading-tight"
         >
-          <span className="bg-blue-600 text-background px-5 rounded-sm ">
+          <span className="bg-primary text-background px-5 rounded-sm ">
             Track
           </span>{" "}
           every application.
@@ -57,7 +56,7 @@ const App = () => {
         <div className="mt-10 flex justify-center gap-4">
           <Link
             to="/dashboard"
-            className="px-6 py-2  rounded-2xl bg-blue-600 text-primary-foreground flex items-center gap-2 hover:opacity-90 transition"
+            className="px-6 py-2  rounded-sm bg-primary text-primary-foreground flex items-center gap-2 hover:opacity-90 transition"
           >
             Start Free
             <HugeiconsIcon icon={ArrowRight01Icon} size={18} />

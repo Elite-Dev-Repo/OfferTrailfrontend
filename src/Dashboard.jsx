@@ -157,71 +157,88 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
           {Array.isArray(jobs) && jobs.length > 0 ? (
             jobs.map((job) => (
-              <div
-                key={job.id}
-                className="group relative p-8 overflow-hidden rounded-sm border border-border bg-card flex flex-col gap-4 hover:border-foreground/40 hover:shadow-md transition-all duration-300"
-              >
+              <Link to={`/application/${job.id}`}>
                 <div
-                  className={`absolute w-60 h-60  rounded-full right-[-10%] bottom-[-20%] z-1  ${statusStyles[job.status]}`}
-                ></div>
-
-                <div
-                  className={`absolute w-30 h-30  rounded-full left-[-10%] top-[-20%] z-1  ${statusStyles[job.status]}`}
-                ></div>
-                <div
-                  onClick={() => {
-                    DeleteJob(job.id);
-                  }}
-                  className="text-red-500 p-2 rounded-full items-center justify-center hover:bg-red-50 absolute top-2 right-3 hidden group-hover:flex"
+                  key={job.id}
+                  className="group md:min-h-70 relative p-8 overflow-hidden rounded-sm border border-border bg-card flex flex-col gap-4 hover:border-foreground/40 hover:shadow-md transition-all duration-300"
                 >
-                  <HugeiconsIcon icon={Delete02Icon} size={25} />
-                </div>
-                {/* Header: Role & Status */}
-                <div className="flex justify-between items-start mt-8 z-2">
-                  <div className="space-y-1 z-2">
-                    <h3 className="text-xl font-bold leading-none tracking-tight z-2">
-                      Role - {job.role}
-                    </h3>
-                    <p className="text-foreground/60 z-2 font-medium">
-                      @ {job.company_name}
-                    </p>
-                  </div>
-                  <span
-                    className={`px-3 py-1 z-2 rounded-full text-[10px] uppercase tracking-wider font-bold ${
-                      statusStyles[job.status] || "bg-gray-100"
-                    }`}
-                  >
-                    {job.status}
-                  </span>
-                </div>
+                  <div
+                    className={`absolute w-60 h-60  rounded-full right-[-10%] bottom-[-20%] z-1  ${statusStyles[job.status]}`}
+                  ></div>
 
-                {/* Meta Information */}
-                <div className="flex items-center gap-4 z-2 text-sm text-muted-foreground border-y border-border/50 py-3">
-                  <div className="flex items-center gap-1.5">
-                    <HugeiconsIcon icon={Calendar01Icon} size={16} />
-                    <span>
-                      Applied:{" "}
-                      {job.application_date
-                        ? new Date(job.application_date).toLocaleDateString()
-                        : "N/A"}
+                  <div
+                    className={`absolute w-30 h-30  rounded-full left-[-10%] top-[-20%] z-1  ${statusStyles[job.status]}`}
+                  ></div>
+
+                  <div
+                    onClick={() => {
+                      DeleteJob(job.id);
+                    }}
+                    className="text-red-500 p-2 rounded-full items-center justify-center hover:bg-red-50 absolute top-2 right-3 hidden group-hover:flex"
+                  >
+                    <HugeiconsIcon icon={Delete02Icon} size={25} />
+                  </div>
+
+                  {/* Header: Role & Status */}
+
+                  <div className="flex justify-between items-start mt-8 z-2">
+                    <div className="space-y-1 z-2">
+                      <h3 className="text-xl font-bold leading-none tracking-tight z-2">
+                        <span className="opacity-50 font-mono font-light">
+                          Role:
+                        </span>{" "}
+                        {job.role}
+                      </h3>
+
+                      <p className="text-foreground/80 font-bold">
+                        <span className="opacity-50 font-mono font-light">
+                          @
+                        </span>{" "}
+                        {job.company_name}
+                      </p>
+                    </div>
+
+                    <span
+                      className={`px-3 py-1 z-2 rounded-full text-[10px] uppercase tracking-wider font-bold ${
+                        statusStyles[job.status] || "bg-gray-100"
+                      }`}
+                    >
+                      {job.status}
                     </span>
                   </div>
-                </div>
 
-                {/* Notes Section */}
-                {job.notes && (
-                  <div className="bg-secondary/40 p-3 z-2 rounded-xl flex gap-2 items-start">
-                    <HugeiconsIcon
-                      icon={Note01Icon}
-                      size={14}
-                      className="mt-1 text-muted-foreground shrink-0"
-                    />
-                    <p className="text-sm text-muted-foreground line-clamp-3">
-                      {job.notes}
-                    </p>
+                  {/* Meta Information */}
+
+                  <div className="flex items-center gap-4 z-2 text-sm text-muted-foreground border-y border-border/50 py-3">
+                    <div className="flex items-center gap-1.5">
+                      <HugeiconsIcon icon={Calendar01Icon} size={16} />
+
+                      <span>
+                        Applied:{" "}
+                        {job.application_date
+                          ? new Date(job.application_date).toLocaleDateString()
+                          : "N/A"}
+                      </span>
+                    </div>
                   </div>
-                )}
-              </div>
+
+                  {/* Notes Section */}
+
+                  {job.notes && (
+                    <div className="bg-secondary/40 p-3 z-2 rounded-xl flex gap-2 items-start">
+                      <HugeiconsIcon
+                        icon={Note01Icon}
+                        size={14}
+                        className="mt-1 text-muted-foreground shrink-0"
+                      />
+
+                      <p className="text-sm text-muted-foreground line-clamp-1">
+                        {job.notes}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </Link>
             ))
           ) : (
             <div className="col-span-full flex flex-col items-center justify-center py-24 border-2 border-dashed border-border rounded-[2rem] text-muted-foreground bg-secondary/10">
@@ -230,7 +247,9 @@ export default function Dashboard() {
                 size={48}
                 className="mb-4 opacity-20"
               />
+
               <p className="text-lg font-medium">No applications found.</p>
+
               <p className="text-sm">Click 'Add New Job' to start tracking.</p>
             </div>
           )}

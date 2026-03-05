@@ -7,6 +7,7 @@ import Register from "./Register";
 import ProtectedRoutes from "./ProtectedRoutes";
 import Dashboard from "./Dashboard";
 import Applications from "./Applications";
+import Application from "./Application";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoutes>
         <Applications />
+      </ProtectedRoutes>
+    ),
+  },
+  {
+    path: "/application/:id",
+    element: (
+      <ProtectedRoutes>
+        <Application />
       </ProtectedRoutes>
     ),
   },
