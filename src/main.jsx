@@ -8,6 +8,7 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import Dashboard from "./Dashboard";
 import Applications from "./Applications";
 import Application from "./Application";
+import Analysis from "./components/Analysis";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoutes>
         <Application />
+      </ProtectedRoutes>
+    ),
+  },
+  {
+    path: "/dashboard/analysis",
+    element: (
+      <ProtectedRoutes>
+        <Analysis />
       </ProtectedRoutes>
     ),
   },

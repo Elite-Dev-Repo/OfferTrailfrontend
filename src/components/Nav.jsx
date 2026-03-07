@@ -4,6 +4,7 @@ import { ACCESS, REFRESH } from "../constants";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Logout01Icon } from "@hugeicons/core-free-icons";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/offerlogo.png";
 
 function Nav() {
   const navigate = useNavigate();
@@ -15,11 +16,14 @@ function Nav() {
   };
 
   return (
-    <nav className="flex items-center justify-between px-8 py-6 border-b border-border">
+    <nav className="flex items-center justify-between px-8 py-6 border-b border-border h-[80px] overflow-hidden">
       <Link to="/">
-        <h1 className="text-2xl px-6 font-bold  tracking-tight text-primary">
-          OfferTrail
-        </h1>
+        <div className="flex items-center gap-2 px-6 h-full overflow-hidden">
+          <img src={logo} className="w-25 h-fit" alt="" />
+          <h1 className="text-2xl font-bold  tracking-tight text-primary">
+            OfferTrail
+          </h1>
+        </div>
       </Link>
       <div className="hidden md:flex items-center gap-8 text-sm">
         <a href="/#features" className="hover:opacity-70 transition">
@@ -43,7 +47,7 @@ function Nav() {
 
             <button
               onClick={handleLogout}
-              className="flex items-center gap-3 text-sm hover:text-destructive transition  p-2 mx-4 bg-red-50 text-red-500 rounded-lg border border-red-300 "
+              className="flex items-center gap-3 text-sm hover:text-destructive transition  p-2 mx-4 bg-red-50 text-red-400 rounded-lg border border-red-100 "
             >
               <HugeiconsIcon icon={Logout01Icon} size={20} />
             </button>

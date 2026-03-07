@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { HugeiconsIcon } from "@hugeicons/react";
+
+import logo from "./assets/offerlogo.png";
 import {
   DashboardSquare01Icon,
   Briefcase01Icon,
@@ -10,6 +12,7 @@ import {
   CreditCardAcceptIcon,
   Loading03Icon,
   PicasaIcon,
+  AiBrain03Icon,
 } from "@hugeicons/core-free-icons";
 import api from "./api";
 import { useNavigate } from "react-router-dom";
@@ -87,11 +90,14 @@ export default function Dashboard() {
 
       {/* Sidebar - UNTOUCHED as requested */}
       <aside className="w-60 shadow-sm border-r border-border py-6 flex flex-col justify-between hidden md:flex max-h-screen fixed top-0 bottom-0">
-        <div>
+        <div className="flex flex-col gap-5">
           <Link to="/">
-            <h1 className="text-2xl px-6 font-bold mb-10 tracking-tight text-primary">
-              OfferTrail
-            </h1>
+            <div className="flex items-center gap-2 px-6 overflow-hidden">
+              <img src={logo} className="w-15 h-fit" alt="" />
+              <h1 className="text-2xl font-bold  tracking-tight text-primary">
+                OfferTrail
+              </h1>
+            </div>
           </Link>
           <nav className="flex gap-2 flex-col">
             <Link to="/dashboard">
@@ -102,15 +108,17 @@ export default function Dashboard() {
             </Link>
 
             <Link to="/dashboard/applications">
-              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5   text-muted-foreground hover:bg-secondary rounded-sm transition">
+              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5  text-muted-foreground hover:bg-secondary rounded-sm transition">
                 <HugeiconsIcon icon={Briefcase01Icon} size={18} />
                 Applications
               </button>
             </Link>
-            <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 text-muted-foreground hover:bg-secondary rounded-sm transition">
-              <HugeiconsIcon icon={AnalysisTextLinkIcon} size={18} />
-              Analytics
-            </button>
+            <Link to="/dashboard/analysis">
+              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 text-muted-foreground hover:bg-secondary rounded-sm transition">
+                <HugeiconsIcon icon={AiBrain03Icon} size={18} />
+                AI Analysis
+              </button>
+            </Link>
           </nav>
         </div>
         <button
