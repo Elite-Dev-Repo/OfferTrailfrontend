@@ -27,7 +27,7 @@ function App() {
 
       {/* HERO */}
       <section
-        className={`hero px-8 py-18 sm:py-15 relative text-center max-w-6xl mx-auto`}
+        className={`hero px-8 py-20 sm:py-15 relative text-center max-w-6xl mx-auto`}
       >
         <div className="absolute bottom-[15%]  h-fit w-fit animate-spin animation-duration-7005 text-primary">
           <HugeiconsIcon icon={PlusSignIcon} size={58} />

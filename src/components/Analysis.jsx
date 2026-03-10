@@ -31,8 +31,8 @@ function Analysis() {
   const LoadJobs = async () => {
     try {
       const res = await api.get("/myjobs/");
-      if (Array.isArray(res.data.results)) {
-        setJobs(res.data.results);
+      if (Array.isArray(res.data)) {
+        setJobs(res.data);
       }
     } catch (error) {
       console.error("Failed to fetch jobs:", error);
