@@ -27,7 +27,7 @@ const Pricing = () => {
     },
     {
       name: "Pro",
-      price: "9",
+      price: "5",
       period: "per month",
       description:
         "For active job seekers applying to multiple roles and companies.",
@@ -45,7 +45,7 @@ const Pricing = () => {
     },
     {
       name: "Career Plus",
-      price: "19",
+      price: "11",
       period: "per month",
       description:
         "For serious job hunters who want powerful tools to stay organized and land roles faster.",
@@ -82,7 +82,7 @@ const Pricing = () => {
         </motion.div>
       </div>
 
-      <div className="flex gap-5 h-fit justify-center items-center  rounded-full border border-primary/20 bg-foreground/5 w-[300px]">
+      <div className="flex gap-5 h-fit justify-center items-center  rounded-full border border-primary/20 bg-primary/5 w-[300px]">
         <button
           onClick={() => setPlans("Monthly")}
           className={
@@ -112,12 +112,12 @@ const Pricing = () => {
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: index * 0.2 }}
-            className="flex flex-col flex-1 gap-5 rounded-md border border-foreground/20 bg-foreground/3 p-5"
+            className="flex flex-col flex-1 gap-5 rounded-md border border-primary/20 bg-primary/3 p-5"
           >
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-medium">{plan.name}</h3>{" "}
               {plan.tag && (
-                <p className="text-sm  text-foreground/80 px-2 py-1 rounded-full border border-foreground/20 bg-foreground/5">
+                <p className="text-sm  text-foreground/80 px-2 py-1 rounded-full border border-primary/20 bg-primary/5">
                   {plan.tag}
                 </p>
               )}
@@ -126,11 +126,11 @@ const Pricing = () => {
             <p className="text-xl font-medium">
               {" "}
               {plans === "Yearly"
-                ? `$${Number(plan.price) * 12}`
+                ? `$${Number(plan.price) * 11}`
                 : `$${plan.price}`}
               <span className="text-sm  text-foreground/60">
                 {" "}
-                {plan.period}
+                {plans === "Yearly" ? "Annual" : plan.period}
               </span>
             </p>
             <button className="bg-foreground text-background px-4 py-2 rounded-sm">

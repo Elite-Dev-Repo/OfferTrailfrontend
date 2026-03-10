@@ -77,7 +77,7 @@ function Faqs() {
               >
                 <AccordionItem
                   value={`item-${index}`}
-                  className="border border-foreground/10 bg-foreground/5 px-9 rounded-lg py-4"
+                  className="border border-primary/10 bg-primary/5 px-9 rounded-lg py-4"
                 >
                   <AccordionTrigger className="text-foreground text-md hover:no-underline font-medium">
                     {faq.question}

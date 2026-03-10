@@ -43,7 +43,7 @@ const More = () => {
             key={feature.id}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ margin: "-100px" }}
             transition={{ duration: 0.7, ease: "easeOut" }}
             className={`flex flex-col gap-12 items-center ${
               index % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"

@@ -1,5 +1,8 @@
-import React from "react";
-import { Label, Pie, PieChart } from "recharts";
+"use client";
+
+import { TrendingUp } from "lucide-react";
+import { LabelList, RadialBar, RadialBarChart } from "recharts";
+
 import {
   Card,
   CardContent,
@@ -16,7 +19,7 @@ import {
 import { useState, useEffect } from "react";
 import api from "@/api";
 
-export const description = "A donut chart with text";
+export const description = "A radial chart with a label";
 
 const chartConfig = {
   Applications: {
@@ -36,7 +39,7 @@ const chartConfig = {
   },
 };
 
-const MyChart = () => {
+export function MyChart2() {
   const [Pendingjobs, setPendingjobs] = useState([]);
   const [Acceptedjobs, setAcceptedJobs] = useState([]);
   const [Rejectedjobs, setRejectedJobs] = useState([]);
@@ -75,8 +78,8 @@ const MyChart = () => {
   const LoadJobs2 = async () => {
     try {
       const res = await api.get("/myjobs/?status=Accepted");
-      if (Array.isArray(res.data)) {
-        setAcceptedJobs(res.data);
+      if (Array.isArray(res.data.results)) {
+        setAcceptedJobs(res.data.results);
       } else {
         setAcceptedJobs([]);
       }
@@ -88,8 +91,8 @@ const MyChart = () => {
   const LoadJobs3 = async () => {
     try {
       const res = await api.get("/myjobs/?status=Rejected");
-      if (Array.isArray(res.data)) {
-        setRejectedJobs(res.data);
+      if (Array.isArray(res.data.results)) {
+        setRejectedJobs(res.data.results);
       } else {
         setRejectedJobs([]);
       }
@@ -99,14 +102,10 @@ const MyChart = () => {
     }
   };
 
-  const loadAll = async () => {
+  useEffect(() => {
     LoadJobs();
     LoadJobs2();
     LoadJobs3();
-  };
-
-  useEffect(() => {
-    loadAll();
   }, []);
 
   return (
@@ -119,19 +118,26 @@ const MyChart = () => {
           config={chartConfig}
           className="mx-auto aspect-square max-h-[250px]"
         >
-          <PieChart width={250} height={250}>
+          <RadialBarChart
+            data={chartData}
+            startAngle={-90}
+            endAngle={380}
+            innerRadius={30}
+            outerRadius={110}
+          >
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel nameKey="status" />}
             />
-            <Pie
-              data={chartData}
-              dataKey="Applications"
-              nameKey="status"
-              innerRadius={50}
-              strokeWidth={5}
-            ></Pie>
-          </PieChart>
+            <RadialBar dataKey="Applications" background>
+              <LabelList
+                position="insideStart"
+                dataKey="status"
+                className="fill-white capitalize mix-blend-luminosity"
+                fontSize={11}
+              />
+            </RadialBar>
+          </RadialBarChart>
         </ChartContainer>
       </CardContent>
 
@@ -151,6 +157,4 @@ const MyChart = () => {
       </div>
     </Card>
   );
-};
-
-export default MyChart;
+}

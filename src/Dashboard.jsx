@@ -13,27 +13,28 @@ import {
   Loading03Icon,
   PicasaIcon,
   AiBrain03Icon,
+  Menu01Icon,
+  Cancel01Icon,
 } from "@hugeicons/core-free-icons";
 import api from "./api";
 import { useNavigate } from "react-router-dom";
 import { ACCESS, REFRESH } from "./constants";
 import { Toaster } from "sonner";
-import { MyChart } from "./components/MyChart";
+import MyChart from "./components/MyChart";
 
 export default function Dashboard() {
   const navigate = useNavigate();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const [jobs, setJobs] = useState([]);
   const [Acceptedjobs, setAcceptedJobs] = useState([]);
 
   const loadDashboardData = async () => {
     try {
-      // Fetching both simultaneously for better performance
       const [allJobs, accepted] = await Promise.all([
         api.get("/myjobs/"),
         api.get("/myjobs/?status=Accepted"),
       ]);
-
       setJobs(Array.isArray(allJobs.data) ? allJobs.data : []);
       setAcceptedJobs(Array.isArray(accepted.data) ? accepted.data : []);
     } catch (error) {
@@ -84,36 +85,65 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="min-h-screen flex bg-background text-foreground">
+    <div className="min-h-screen flex bg-background text-foreground flex-col md:flex-row">
       <title>OfferTrail - User Dashboard</title>
       <Toaster position="top-center" />
 
-      {/* Sidebar - UNTOUCHED as requested */}
-      <aside className="w-60 shadow-sm border-r border-border py-6 flex flex-col justify-between hidden md:flex max-h-screen fixed top-0 bottom-0">
+      {/* Mobile Top Bar */}
+      <div className="md:hidden flex items-center justify-between p-4 border-b border-border bg-white sticky top-0 z-50">
+        <div className="flex items-center gap-2">
+          <img src={logo} className="w-8 h-fit" alt="" />
+          <h1 className="text-xl font-bold text-primary">OfferTrail</h1>
+        </div>
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="p-2"
+        >
+          <HugeiconsIcon
+            icon={isMobileMenuOpen ? Cancel01Icon : Menu01Icon}
+            size={24}
+          />
+        </button>
+      </div>
+
+      {/* Sidebar - Desktop & Mobile Drawer */}
+      <aside
+        className={`
+          fixed inset-y-0 left-0 z-50 w-60 bg-white shadow-sm border-r border-border py-6 flex flex-col justify-between transition-transform duration-300 transform
+          ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}
+          md:translate-x-0  md:flex h-screen
+        `}
+      >
         <div className="flex flex-col gap-5">
-          <Link to="/">
+          <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
             <div className="flex items-center gap-2 px-6 overflow-hidden">
               <img src={logo} className="w-15 h-fit" alt="" />
-              <h1 className="text-2xl font-bold  tracking-tight text-primary">
+              <h1 className="text-2xl font-bold tracking-tight text-primary">
                 OfferTrail
               </h1>
             </div>
           </Link>
           <nav className="flex gap-2 flex-col">
-            <Link to="/dashboard">
+            <Link to="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>
               <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 rounded-sm bg-primary/10 text-primary act">
                 <HugeiconsIcon icon={DashboardSquare01Icon} size={18} />
                 Dashboard
               </button>
             </Link>
 
-            <Link to="/dashboard/applications">
-              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5  text-muted-foreground hover:bg-secondary rounded-sm transition">
+            <Link
+              to="/dashboard/applications"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 text-muted-foreground hover:bg-secondary rounded-sm transition">
                 <HugeiconsIcon icon={Briefcase01Icon} size={18} />
                 Applications
               </button>
             </Link>
-            <Link to="/dashboard/analysis">
+            <Link
+              to="/dashboard/analysis"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 text-muted-foreground hover:bg-secondary rounded-sm transition">
                 <HugeiconsIcon icon={AiBrain03Icon} size={18} />
                 AI Analysis
@@ -123,15 +153,23 @@ export default function Dashboard() {
         </div>
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 text-sm hover:text-destructive transition p-4 py-3 mx-4 bg-red-50 text-red-500 rounded-lg border border-red-400 "
+          className="flex items-center gap-3 text-sm hover:text-destructive transition p-4 py-3 mx-4 bg-red-50 text-red-500 rounded-lg border border-red-400"
         >
           <HugeiconsIcon icon={Logout01Icon} size={20} />
           Logout
         </button>
       </aside>
 
-      {/* Main Content - IMPROVED STYLING */}
-      <main className="flex-1 w-full min-h-screen md:ml-60 p-6 md:p-10 bg-slate-50/50">
+      {/* Overlay for mobile drawer */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/20 z-40 md:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Main Content */}
+      <main className="  md:ml-60 flex-1 w-full min-h-screen p-6 md:p-10 bg-slate-50/50">
         <header className="mb-10">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900">
             Dashboard Overview

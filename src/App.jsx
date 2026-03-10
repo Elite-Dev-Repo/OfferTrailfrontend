@@ -27,17 +27,28 @@ function App() {
 
       {/* HERO */}
       <section
-        className={`hero px-8 py-28 relative text-center max-w-6xl mx-auto`}
+        className={`hero px-8 py-20 relative text-center max-w-6xl mx-auto`}
       >
         <div className="absolute bottom-[15%]  h-fit w-fit animate-spin animation-duration-7005 text-primary">
           <HugeiconsIcon icon={PlusSignIcon} size={58} />
         </div>
-        {/* <div className="absolute right-0 top-[15%] h-fit w-fit animate-bounce shad animation-duration-4000">
-          <HugeiconsIcon icon={Calendar02Icon} size={58} />
-        </div> */}
+        <motion.div
+          initial={{ opacity: 0, x: -120 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          className=" w-fit mx-auto mb-5 flex items-center gap-3 px-3 py-1 border border-primary/20 bg-primary/[0.03] rounded-full"
+        >
+          <div className="relative flex h-3 w-3">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75 "></span>
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-primary animate-bounce"></span>
+          </div>
+          <span className="font-light text-[12px] tracking-wide uppercase px-5">
+            Analyze your Job Experience.
+          </span>
+        </motion.div>{" "}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-5xl md:text-6xl relative font-bold tracking-tight leading-tight"
         >
@@ -48,12 +59,10 @@ function App() {
           <br />
           Land your next offer faster.
         </motion.h2>
-
         <p className="mt-6 text-muted-foreground max-w-2xl mx-auto text-lg">
           OfferTrail helps you manage your job search like a professional. Stay
           organized, track progress, and never miss an opportunity.
         </p>
-
         <div className="mt-10 flex justify-center gap-4">
           <Link
             to="/dashboard"
@@ -62,9 +71,6 @@ function App() {
             Start Free
             <HugeiconsIcon icon={ArrowRight01Icon} size={18} />
           </Link>
-          <button className="px-6 py-2 rounded-2xl border border-border hover:bg-muted transition">
-            See Demo
-          </button>
         </div>
       </section>
 
@@ -91,7 +97,10 @@ function App() {
               color: "bg-amber-50 text-amber-600 border border-amber-200",
             },
           ].map((item, i) => (
-            <div
+            <motion.div
+              initial={{ opacity: 0, x: -100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.15 }}
               key={i}
               className="p-10 rounded-3xl border border-border bg-card"
             >
@@ -100,7 +109,7 @@ function App() {
               </div>
               <h3 className="text-xl font-semibold">{item.title}</h3>
               <p className="mt-4 text-muted-foreground text-sm">{item.desc}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>

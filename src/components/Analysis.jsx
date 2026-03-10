@@ -10,6 +10,8 @@ import {
   Logout01Icon,
   AiBrain03Icon,
   Loading03Icon,
+  Menu01Icon,
+  Cancel01Icon,
 } from "@hugeicons/core-free-icons";
 import { Toaster, toast } from "sonner";
 
@@ -20,6 +22,7 @@ function Analysis() {
   const [jobs, setJobs] = useState([]);
   const [analysis, setAnalysis] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     LoadJobs();
@@ -28,8 +31,8 @@ function Analysis() {
   const LoadJobs = async () => {
     try {
       const res = await api.get("/myjobs/");
-      if (Array.isArray(res.data)) {
-        setJobs(res.data);
+      if (Array.isArray(res.data.results)) {
+        setJobs(res.data.results);
       }
     } catch (error) {
       console.error("Failed to fetch jobs:", error);
@@ -58,7 +61,7 @@ function Analysis() {
 
     setLoading(true);
     try {
-      // Use a valid model name like 'gemini-1.5-flash' or 'gemini-2.0-flash-exp'
+      // Use a valid model name: 'gemini-1.5-flash'
       const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
       const prompt = `
@@ -96,36 +99,66 @@ function Analysis() {
   };
 
   return (
-    <div className="min-h-screen flex bg-slate-50 text-foreground">
+    <div className="min-h-screen flex flex-col md:flex-row bg-slate-50 text-foreground">
       <Toaster position="top-center" richColors />
 
-      {/* Sidebar - Fixed */}
-      <aside className="w-60 shadow-sm border-r border-border py-6 flex bg-background flex-col justify-between hidden md:flex max-h-screen fixed top-0 bottom-0">
+      {/* Mobile Top Bar */}
+      <div className="md:hidden flex items-center justify-between p-4 border-b border-border bg-white sticky top-0 z-50">
+        <div className="flex items-center gap-2">
+          <img src={logo} className="w-8 h-fit" alt="" />
+          <h1 className="text-xl font-bold text-primary">OfferTrail</h1>
+        </div>
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="p-2"
+        >
+          <HugeiconsIcon
+            icon={isMobileMenuOpen ? Cancel01Icon : Menu01Icon}
+            size={24}
+          />
+        </button>
+      </div>
+
+      {/* Sidebar - Desktop & Mobile Drawer */}
+      <aside
+        className={`
+          fixed  inset-y-0 left-0 z-50 w-60 bg-background border-r border-border py-6 flex flex-col justify-between transition-transform duration-300 transform
+          ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}
+          md:translate-x-0  md:flex h-screen
+        `}
+      >
         <div className="flex flex-col gap-5">
-          <Link to="/">
+          <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
             <div className="flex items-center gap-2 px-6 overflow-hidden">
               <img src={logo} className="w-15 h-fit" alt="" />
-              <h1 className="text-2xl font-bold  tracking-tight text-primary">
+              <h1 className="text-2xl font-bold tracking-tight text-primary">
                 OfferTrail
               </h1>
             </div>
           </Link>
           <nav className="flex gap-2 flex-col">
-            <Link to="/dashboard">
-              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 text-muted-foreground hover:bg-secondary rounded-sm transition">
+            <Link to="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>
+              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 text-muted-foreground hover:bg-secondary rounded-sm transition text-left">
                 <HugeiconsIcon icon={DashboardSquare01Icon} size={18} />
                 Dashboard
               </button>
             </Link>
 
-            <Link to="/dashboard/applications">
-              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 text-muted-foreground hover:bg-secondary rounded-sm transition">
+            <Link
+              to="/dashboard/applications"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 text-muted-foreground hover:bg-secondary rounded-sm transition text-left">
                 <HugeiconsIcon icon={Briefcase01Icon} size={18} />
                 Applications
               </button>
             </Link>
-            <Link to="/dashboard/analysis">
-              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 rounded-sm rounded-sm bg-primary/10 text-primary act">
+
+            <Link
+              to="/dashboard/analysis"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 rounded-sm bg-primary/10 text-primary act text-left">
                 <HugeiconsIcon icon={AiBrain03Icon} size={18} />
                 AI Analysis
               </button>
@@ -134,19 +167,27 @@ function Analysis() {
         </div>
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 text-sm hover:text-destructive transition p-4 py-3 mx-4 bg-red-50 text-red-500 rounded-lg border border-red-400 "
+          className="flex items-center gap-3 text-sm hover:text-destructive transition p-4 py-3 mx-4 bg-red-50 text-red-500 rounded-lg border border-red-400"
         >
           <HugeiconsIcon icon={Logout01Icon} size={20} />
           Logout
         </button>
       </aside>
 
+      {/* Backdrop for mobile drawer */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/20 z-40 md:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
       {/* Main Content */}
-      <main className="flex-1 md:ml-64 p-6 md:p-12">
+      <main className="flex-1 p-6 md:p-12 md:ml-60">
         <div className="max-w-4xl mx-auto space-y-8">
-          <div className="flex justify-between items-end">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
             <div>
-              <h2 className="text-4xl font-black tracking-tight text-slate-900 flex items-center gap-3">
+              <h2 className="text-3xl md:text-4xl font-black tracking-tight text-slate-900 flex items-center gap-3">
                 AI Analysis
               </h2>
               <p className="text-slate-500 mt-2 text-lg">
@@ -156,7 +197,7 @@ function Analysis() {
             <button
               onClick={generate}
               disabled={loading}
-              className="p-3 flex items-center gap-2 bg-white border border-border rounded-xl hover:bg-slate-50 transition shadow-sm disabled:opacity-50"
+              className="w-full md:w-auto p-3 px-6 flex items-center justify-center gap-2 bg-white border border-border rounded-xl hover:bg-slate-50 transition shadow-sm disabled:opacity-50"
             >
               <span className="font-semibold text-sm">Generate</span>
               <HugeiconsIcon
@@ -167,7 +208,7 @@ function Analysis() {
             </button>
           </div>
 
-          <div className="bg-white border border-slate-200 rounded-[2rem] overflow-hidden shadow-sm">
+          <div className="bg-white border border-slate-200 rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-sm">
             <div className="bg-slate-900 p-6 flex items-center gap-4 text-white">
               <div className="p-2 bg-primary/20 rounded-lg">
                 <HugeiconsIcon
@@ -177,7 +218,7 @@ function Analysis() {
                 />
               </div>
               <div>
-                <h4 className="font-bold font-sm">
+                <h4 className="font-bold text-sm">
                   OfferTrail AI Intelligence
                 </h4>
                 <p className="text-xs text-slate-400">
