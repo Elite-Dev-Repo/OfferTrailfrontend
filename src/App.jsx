@@ -27,7 +27,7 @@ function App() {
 
       {/* HERO */}
       <section
-        className={`hero px-8 py-20 relative text-center max-w-6xl mx-auto`}
+        className={`hero px-8 py-18 sm:py-15 relative text-center max-w-6xl mx-auto`}
       >
         <div className="absolute bottom-[15%]  h-fit w-fit animate-spin animation-duration-7005 text-primary">
           <HugeiconsIcon icon={PlusSignIcon} size={58} />
@@ -42,7 +42,7 @@ function App() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75 "></span>
             <span className="relative inline-flex rounded-full h-3 w-3 bg-primary animate-bounce"></span>
           </div>
-          <span className="font-light text-[12px] tracking-wide uppercase px-5">
+          <span className="font-light text-[10px] tracking-wide uppercase px-5">
             Analyze your Job Experience.
           </span>
         </motion.div>{" "}
@@ -50,7 +50,7 @@ function App() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-5xl md:text-6xl relative font-bold tracking-tight leading-tight"
+          className="text-[2.2rem] xs:text-[2.8rem] sm:text-[3.5rem] md:text-[4.5rem] relative font-bold tracking-tight leading-tight"
         >
           <span className="bg-primary text-background px-5 rounded-sm ">
             Track

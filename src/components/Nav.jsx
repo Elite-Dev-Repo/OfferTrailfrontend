@@ -132,7 +132,7 @@ function Nav() {
             <Link
               to="/register"
               onClick={toggleMenu}
-              className="w-full text-center py-4 rounded-xl bg-primary text-primary-foreground font-bold"
+              className="w-full text-center py-4 px-6 rounded-xl bg-primary text-primary-foreground font-bold"
             >
               Get Started
             </Link>
