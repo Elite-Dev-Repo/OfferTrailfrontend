@@ -127,52 +127,53 @@ export default function Applications() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-60 bg-white border-r border-border py-6 flex flex-col justify-between transition-transform duration-300 transform ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 md:flex h-screen`}
+        className={`
+              fixed  inset-y-0 left-0 z-50 w-60 bg-background border-r border-border py-6 flex flex-col justify-between transition-transform duration-300 transform
+              ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}
+              md:translate-x-0  md:flex h-screen
+            `}
       >
         <div className="flex flex-col gap-5">
-          <Link to="/" className="px-6 flex items-center gap-2">
-            <img src={logo} className="w-10 h-fit" alt="Logo" />
-            <h1 className="text-2xl font-bold tracking-tight text-primary">
-              OfferTrail
-            </h1>
+          <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
+            <div className="flex items-center gap-2 px-6 overflow-hidden">
+              <img src={logo} className="w-15 h-fit" alt="" />
+              <h1 className="text-2xl font-bold tracking-tight text-primary">
+                OfferTrail
+              </h1>
+            </div>
           </Link>
-          <nav className="flex flex-col gap-2">
-            {[
-              {
-                to: "/dashboard",
-                label: "Dashboard",
-                icon: DashboardSquare01Icon,
-              },
-              {
-                to: "/dashboard/applications",
-                label: "Applications",
-                icon: Briefcase01Icon,
-                active: true,
-              },
-              {
-                to: "/dashboard/analysis",
-                label: "AI Analysis",
-                icon: AiBrain03Icon,
-              },
-            ].map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <button
-                  className={`flex items-center gap-3 text-sm font-medium w-full p-2.5 transition text-left ${item.active ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary"}`}
-                >
-                  <HugeiconsIcon icon={item.icon} size={18} />
-                  {item.label}
-                </button>
-              </Link>
-            ))}
+          <nav className="flex gap-2 flex-col">
+            <Link to="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>
+              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 text-muted-foreground hover:bg-secondary rounded-sm transition text-left">
+                <HugeiconsIcon icon={DashboardSquare01Icon} size={18} />
+                Dashboard
+              </button>
+            </Link>
+
+            <Link
+              to="/dashboard/applications"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 rounded-sm bg-primary/10 text-primary act text-left ">
+                <HugeiconsIcon icon={Briefcase01Icon} size={18} />
+                Applications
+              </button>
+            </Link>
+
+            <Link
+              to="/dashboard/analysis"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 text-muted-foreground hover:bg-secondary rounded-sm transition text-left ">
+                <HugeiconsIcon icon={AiBrain03Icon} size={18} />
+                AI Analysis
+              </button>
+            </Link>
           </nav>
         </div>
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 text-sm transition p-4 py-3 mx-4 bg-red-50 text-red-500 rounded-lg border border-red-200 hover:bg-red-100"
+          className="flex items-center gap-3 text-sm hover:text-destructive transition p-4 py-3 mx-4 bg-red-50 text-red-500 rounded-lg border border-red-400"
         >
           <HugeiconsIcon icon={Logout01Icon} size={20} />
           Logout
@@ -257,10 +258,10 @@ export default function Applications() {
                   <div className="group md:min-h-70 relative p-8 overflow-hidden rounded-sm border border-border bg-card flex flex-col gap-4 hover:border-foreground/40 hover:shadow-md transition-all duration-300">
                     {/* Status-based decorative circles */}
                     <div
-                      className={`absolute w-60 h-60 rounded-full right-[-10%] bottom-[-20%] z-1 opacity-20 ${STATUS_STYLES[job.status] || "bg-gray-100"}`}
+                      className={`absolute w-60 h-60 rounded-full right-[-10%] bottom-[-20%] z-1  ${STATUS_STYLES[job.status] || "bg-gray-100"}`}
                     ></div>
                     <div
-                      className={`absolute w-30 h-30 rounded-full left-[-10%] top-[-20%] z-1 opacity-20 ${STATUS_STYLES[job.status] || "bg-gray-100"}`}
+                      className={`absolute w-30 h-30 rounded-full left-[-10%] top-[-20%] z-1 ${STATUS_STYLES[job.status] || "bg-gray-100"}`}
                     ></div>
 
                     <div className="flex justify-between items-start mt-8 z-2">
