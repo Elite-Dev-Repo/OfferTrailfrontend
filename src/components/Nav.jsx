@@ -113,13 +113,13 @@ function Nav() {
         <div className="mt-4">
           {token ? (
             <div className="flex flex-col gap-4">
-              <Link
-                to="/dashboard"
+              <a
+                href="/dashboard"
                 onClick={toggleMenu}
                 className="w-full text-center py-4 rounded-xl bg-primary text-primary-foreground font-bold"
               >
                 Dashboard
-              </Link>
+              </a>
               <button
                 onClick={handleLogout}
                 className="w-full flex items-center justify-center gap-3 py-4 text-red-500 bg-red-50 rounded-xl border border-red-100 font-bold"

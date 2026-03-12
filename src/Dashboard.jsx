@@ -124,31 +124,31 @@ export default function Dashboard() {
             </div>
           </Link>
           <nav className="flex gap-2 flex-col">
-            <Link to="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>
+            <a href="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>
               <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 rounded-sm bg-primary/10 text-primary act">
                 <HugeiconsIcon icon={DashboardSquare01Icon} size={18} />
                 Dashboard
               </button>
-            </Link>
+            </a>
 
-            <Link
-              to="/dashboard/applications"
+            <a
+              href="/dashboard/applications"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 text-muted-foreground hover:bg-secondary rounded-sm transition">
                 <HugeiconsIcon icon={Briefcase01Icon} size={18} />
                 Applications
               </button>
-            </Link>
-            <Link
-              to="/dashboard/analysis"
+            </a>
+            <a
+              href="/dashboard/analysis"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 text-muted-foreground hover:bg-secondary rounded-sm transition">
                 <HugeiconsIcon icon={AiBrain03Icon} size={18} />
                 AI Analysis
               </button>
-            </Link>
+            </a>
           </nav>
         </div>
         <button
