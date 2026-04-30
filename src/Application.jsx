@@ -33,16 +33,16 @@ function Application() {
       setLoading(false);
     }
   };
-
   const DeleteJob = async (id) => {
     if (!window.confirm("Are you sure you want to delete this application?"))
       return;
 
     try {
+      // Changed to a standard delete request
       const res = await api.delete(`/myjobs/${id}/`);
-      if (res.status === 204) {
+      if (res.status === 204 || res.status === 200) {
         toast.success("Application removed successfully");
-        navigate("/dashboard"); // Adjusted to your main dashboard route
+        navigate("/dashboard/applications");
       }
     } catch (error) {
       console.error("Failed to Delete job:", error);

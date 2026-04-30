@@ -7,7 +7,6 @@ import {
   DashboardSquare01Icon,
   Briefcase01Icon,
   Logout01Icon,
-  AnalysisTextLinkIcon,
   Coins01Icon,
   CreditCardAcceptIcon,
   Loading03Icon,
@@ -16,29 +15,26 @@ import {
   Menu01Icon,
   Cancel01Icon,
 } from "@hugeicons/core-free-icons";
-import api from "./api";
 import { useNavigate } from "react-router-dom";
 import { ACCESS, REFRESH } from "./constants";
 import { Toaster } from "sonner";
 import MyChart from "./components/MyChart";
+import { getJobs } from "./data";
 
 export default function Dashboard() {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
   const [jobs, setJobs] = useState([]);
-  const [Acceptedjobs, setAcceptedJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const loadDashboardData = async () => {
     try {
-      const [allJobs, accepted] = await Promise.all([
-        api.get("/myjobs/"),
-        api.get("/myjobs/?status=Accepted"),
-      ]);
-      setJobs(Array.isArray(allJobs.data) ? allJobs.data : []);
-      setAcceptedJobs(Array.isArray(accepted.data) ? accepted.data : []);
+      const res = await getJobs();
+      setJobs(Array.isArray(res) ? res : []);
     } catch (error) {
       console.error("Failed to fetch dashboard data:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -46,13 +42,16 @@ export default function Dashboard() {
     loadDashboardData();
   }, []);
 
-  const rest = jobs.length - Acceptedjobs.length;
-
   const handleLogout = () => {
     localStorage.removeItem(ACCESS);
     localStorage.removeItem(REFRESH);
     navigate("/register");
   };
+
+  // Logic to derive stats from the jobs array
+  const acceptedJobs = jobs.filter((j) => j.status === "Accepted");
+  const pendingJobs = jobs.filter((j) => j.status === "Pending");
+  const otherJobsCount = jobs.length - acceptedJobs.length;
 
   const statusStyles = {
     Pending: "bg-amber-50 text-amber-600 border border-amber-200",
@@ -73,26 +72,25 @@ export default function Dashboard() {
       title: "Accepted",
       color: "text-fuchsia-600",
       bg: "bg-fuchsia-50",
-      data: Acceptedjobs.length,
+      data: acceptedJobs.length,
     },
     {
       icon: Loading03Icon,
       title: "Pending / Others",
       color: "text-orange-600",
       bg: "bg-orange-50",
-      data: rest,
+      data: otherJobsCount,
     },
   ];
 
   return (
     <div className="min-h-screen flex bg-background text-foreground flex-col md:flex-row">
-      <title>OfferTrail - User Dashboard</title>
       <Toaster position="top-center" />
 
       {/* Mobile Top Bar */}
       <div className="md:hidden flex items-center justify-between p-4 border-b border-border bg-white sticky top-0 z-50">
         <div className="flex items-center gap-2">
-          <img src={logo} className="w-8 h-fit" alt="" />
+          <img src={logo} className="w-8 h-fit" alt="Logo" />
           <h1 className="text-xl font-bold text-primary">OfferTrail</h1>
         </div>
         <button
@@ -106,49 +104,49 @@ export default function Dashboard() {
         </button>
       </div>
 
-      {/* Sidebar - Desktop & Mobile Drawer */}
+      {/* Sidebar */}
       <aside
         className={`
           fixed inset-y-0 left-0 z-50 w-60 bg-white shadow-sm border-r border-border py-6 flex flex-col justify-between transition-transform duration-300 transform
           ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}
-          md:translate-x-0  md:flex h-screen
+          md:translate-x-0 md:flex h-screen
         `}
       >
         <div className="flex flex-col gap-5">
           <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
             <div className="flex items-center gap-2 px-6 overflow-hidden">
-              <img src={logo} className="w-15 h-fit" alt="" />
+              <img src={logo} className="w-10 h-fit" alt="Logo" />
               <h1 className="text-2xl font-bold tracking-tight text-primary">
                 OfferTrail
               </h1>
             </div>
           </Link>
-          <nav className="flex gap-2 flex-col">
-            <a href="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>
-              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 rounded-sm bg-primary/10 text-primary act">
+          <nav className="flex gap-2 flex-col px-4">
+            <Link to="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>
+              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 rounded-lg bg-primary/10 text-primary">
                 <HugeiconsIcon icon={DashboardSquare01Icon} size={18} />
                 Dashboard
               </button>
-            </a>
+            </Link>
 
-            <a
-              href="/dashboard/applications"
+            <Link
+              to="/dashboard/applications"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 text-muted-foreground hover:bg-secondary rounded-sm transition">
+              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 text-muted-foreground hover:bg-secondary rounded-lg transition text-left">
                 <HugeiconsIcon icon={Briefcase01Icon} size={18} />
                 Applications
               </button>
-            </a>
-            <a
-              href="/dashboard/analysis"
+            </Link>
+            <Link
+              to="/dashboard/analysis"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 text-muted-foreground hover:bg-secondary rounded-sm transition">
+              <button className="flex items-center gap-3 text-sm font-medium w-full p-2.5 text-muted-foreground hover:bg-secondary rounded-lg transition text-left">
                 <HugeiconsIcon icon={AiBrain03Icon} size={18} />
                 AI Analysis
               </button>
-            </a>
+            </Link>
           </nav>
         </div>
         <button
@@ -160,7 +158,7 @@ export default function Dashboard() {
         </button>
       </aside>
 
-      {/* Overlay for mobile drawer */}
+      {/* Overlay for mobile */}
       {isMobileMenuOpen && (
         <div
           className="fixed inset-0 bg-black/20 z-40 md:hidden"
@@ -169,7 +167,7 @@ export default function Dashboard() {
       )}
 
       {/* Main Content */}
-      <main className="  md:ml-60 flex-1 w-full min-h-screen p-6 md:p-10 bg-slate-50/50">
+      <main className="md:ml-60 flex-1 w-full min-h-screen p-6 md:p-10 bg-slate-50/50">
         <header className="mb-10">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900">
             Dashboard Overview
@@ -204,9 +202,8 @@ export default function Dashboard() {
             ))}
           </div>
 
-          {/* Bottom Grid: Recent Jobs & Chart */}
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-            {/* Recent Applications Card */}
+            {/* Recent Applications */}
             <div className="bg-white rounded-2xl border border-border/60 shadow-sm overflow-hidden flex flex-col">
               <div className="p-6 border-b border-border/50 flex items-center justify-between">
                 <h2 className="font-bold text-lg text-slate-800">
@@ -224,7 +221,7 @@ export default function Dashboard() {
                 {jobs.length > 0 ? (
                   jobs.slice(0, 5).map((job, idx) => (
                     <div
-                      key={idx}
+                      key={job.id || idx}
                       className="group flex items-center gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors"
                     >
                       <div className="w-10 h-10 bg-slate-100 flex items-center justify-center rounded-lg group-hover:bg-white border border-transparent group-hover:border-slate-200">
@@ -243,7 +240,10 @@ export default function Dashboard() {
                         </p>
                       </div>
                       <div
-                        className={`text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-tighter ${statusStyles[job.status] || "bg-gray-200 text-gray-700"}}`}
+                        className={`text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-tighter ${
+                          statusStyles[job.status] ||
+                          "bg-gray-100 text-gray-600"
+                        }`}
                       >
                         {job.status || "Pending"}
                       </div>
@@ -251,7 +251,9 @@ export default function Dashboard() {
                   ))
                 ) : (
                   <div className="p-10 text-center text-sm text-slate-400">
-                    No applications yet. Start hunting!
+                    {loading
+                      ? "Loading applications..."
+                      : "No applications yet. Start hunting!"}
                   </div>
                 )}
               </div>
@@ -263,7 +265,7 @@ export default function Dashboard() {
                 Application Analytics
               </h2>
               <div className="flex-1 w-full relative">
-                <MyChart />
+                <MyChart data={jobs} />
               </div>
             </div>
           </div>

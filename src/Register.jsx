@@ -7,7 +7,7 @@ import { LogIn } from "lucide-react";
 
 import { HugeiconsIcon } from "@hugeicons/react";
 import { useNavigate } from "react-router-dom";
-// ADDED ViewIcon and ViewOffIcon to imports
+
 import {
   Loading03Icon,
   ViewIcon,
@@ -39,11 +39,11 @@ export default function Register() {
       localStorage.setItem(REFRESH, res.data.refresh);
 
       toast.success(" Registration Successful");
-      navigate("/dashboard");
+      navigate("/");
     } catch (error) {
       setLoading(false);
       console.log(error);
-      toast.error("Incorrect Register details");
+      toast.error("error");
     }
   };
 
